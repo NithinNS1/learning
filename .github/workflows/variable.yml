@@ -1,0 +1,39 @@
+name: Hello World
+env:
+  VAR1: 'Hello,world from workflow level'
+  VAR2: 'Bye,world from workflow level'
+on: [push]
+jobs: 
+  say-hello:
+    env:
+      VAR3: 'Hello,world from job level'
+      VAR4: 'Bye,world from job level'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      env:
+        VAR5: 'Hello,world from step level'
+        VAR6: 'Bye,world from step level'
+      uses: actions/checkout@v2.0.0
+    - run : |
+        echo "Accessing env variables using shell syntax"
+        echo $VAR1
+        echo $VAR2
+        echo $VAR3
+        echo $VAR4
+        echo $VAR5
+        echo $VAR6
+        echo "-----------------------------------------------------"
+        echo "Accessing env variables using YAML syntax"
+        echo "${{env.VAR1}}"
+        echo "${{env.VAR2}}"
+        echo "${{env.VAR3}}"
+        echo "${{env.VAR4}}"
+        
+  # say-bye:
+  #   needs: say-hello
+  #   runs-on: macos-latest
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v2.0.0
+  #   - run : echo Bye, world!
