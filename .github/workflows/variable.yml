@@ -14,8 +14,7 @@ jobs:
       env:
         VAR5: 'Hello,world from step level'
         VAR6: 'Bye,world from step level'
-      uses: actions/checkout@v2.0.0
-    - run : |
+      run : |
         echo "Accessing env variables using shell syntax"
         echo $VAR1
         echo $VAR2
@@ -29,6 +28,8 @@ jobs:
         echo "${{env.VAR2}}"
         echo "${{env.VAR3}}"
         echo "${{env.VAR4}}"
+        echo "${{env.VAR5}}"
+        echo "${{env.VAR6}}"
         
   # say-bye:
   #   needs: say-hello
